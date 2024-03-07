@@ -3,19 +3,25 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import './App.css';
 //components
 import Home from './components/Home'
-import Register from './components/Register'
 import Login from './components/Login'
+import { useState } from 'react';
+
+
 
 function App() {
-  return <div>
+  const [token, setToken] = useState(null);
+
+  console.log("token", token)
+  return (
+  <div>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login token={token} />} />
       </Routes>
     </BrowserRouter>
-  </div>;
+  </div>
+  );
 }
 
 export default App
