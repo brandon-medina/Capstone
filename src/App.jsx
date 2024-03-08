@@ -4,6 +4,7 @@ import './App.css';
 //components
 import Home from './components/Home'
 import Login from './components/Login'
+import ProductList from './components/ProductList'
 import { useState } from 'react';
 
 
