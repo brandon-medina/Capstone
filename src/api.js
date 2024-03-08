@@ -5,10 +5,10 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://fakestoreapi.com/' }),
   endpoints: (builder) => ({
     loginUser: builder.mutation({
-      query: (credentials) => ({
+      query: (loginUser) => ({
         url: 'auth/login',
         method: 'POST',
-        body: credentials,
+        body: loginUser,
       }),
     }),
   }),
