@@ -18,6 +18,7 @@ function Login() {
             if (result && result.token) {
                 sessionStorage.setItem('token', result.token); // Storing token in session storage
                 navigate('/'); // Redirect on success
+                console.log(result);
             }
         } catch (error) {
             console.error('Login failed:', error);

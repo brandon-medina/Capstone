@@ -19,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login token={token} />} />
+        <Route path="/products" element={<ProductList token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsI…Q5NH0.B6oeYZFtENKGX-Zu6qgEMycz0huhz3DQwrmUn5iF2jQ'} />} />
       </Routes>
     </BrowserRouter>
   </div>
