@@ -73,12 +73,14 @@ const ProductList = () => {
         {processedProducts &&
             processedProducts.map(product => (
               <div key={product.id} className="product-card">
+                <link to= {`ProductDetail`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <img src={product.image} alt={product.title} />
                 <div className="product-info">
                   <h5>{shortenName(product.title)}</h5>
                   <p>${product.price}</p>
                   <p><RatingStars rating={product.rating.rate} /></p>
                 </div>
+                </link>
               </div>
             ))}
         </div>
