@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCart } from '../useCart';
+import { useCart } from '../hooks/useCart';
 const MyCart = () => {
   const { cartItems } = useCart();
   return (

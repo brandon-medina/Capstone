@@ -1,35 +1,32 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-//styles
-import './App.css';
-//components
-import Home from './components/Home'
-import Login from './components/Login'
-import ProductList from './components/ProductList'
-import ProductDetail from './components/ProductDetail'
-import { CartProvider } from './components/CartContext'
-import { useState } from 'react';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider, useAuth } from "./AuthContext.jsx"; // Adjust the path as necessary
+import Home from "./components/Home"; // Adjust the path as necessary
+import ProductList from "./components/ProductList"; // Adjust the path as necessary
+import ProductDetail from "./components/ProductDetail"; // Adjust the path as necessary
+import MyCart from "./components/MyCart"; // Adjust the path as necessary
+import Login from "./components/Login"; // Adjust the path as necessary
 
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? children : <Navigate to="/login" />;
+};
 
-
-function App() {
-  const [token, setToken] = useState(null);
-
-  console.log("token", token)
+const App = () => {
   return (
-  <div>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login token={token} />} />
-        <Route path="/products" element={<ProductList token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsI…gyNX0.p_hQG9Ty5Bh_G-8_oIz8wVS0OvioxFFIfOiQnkWKByg'} />} />
-        <CartProvider>
-          <Route path="/products/:productID" element={<ProductDetail token={token} />} />
-        </CartProvider>
-        <Route path="/products/:productId" element={<ProductDetail />} />
-      </Routes>
-    </BrowserRouter>
-  </div>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/products" element={<ProtectedRoute><ProductList /></ProtectedRoute>} />
+          <Route path="/products/:productId" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>} />
+          <Route path="/my-cart" element={<ProtectedRoute><MyCart /></ProtectedRoute>} />
+          {/* Add other routes as necessary */}
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
-}
+};
 
-export default App
+export default App;

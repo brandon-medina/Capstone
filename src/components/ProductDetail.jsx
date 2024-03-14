@@ -2,7 +2,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetProductDetailQuery } from '../api'; // Adjust the import path as necessary
-import { useCart } from './CartContext'
+import { useCart } from '../hooks/useCart'
 
 const ProductDetail = () => {
   const { productId } = useParams();
