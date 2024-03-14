@@ -1,8 +1,10 @@
 // src/components/ProductList.jsx
 import React, { useState, useMemo } from 'react';
 import { useGetProductsQuery } from '../api';
-import '../styles/productList.css';
 import RatingStars from './RatingStars'
+import { Link } from 'react-router-dom';
+import '../styles/productList.css';
+
 
 const ProductList = () => {
   const { data: products, error, isLoading } = useGetProductsQuery();
@@ -34,7 +36,7 @@ const ProductList = () => {
     return result;
   }, [products, sortKey, filterCategory]);
 
-  const shortenName = (name, maxLength = 40) => {
+  const shortenName = (name, maxLength = 30) => {
     return name.length > maxLength ? `${name.substring(0, maxLength)}...` : name;
   };
 
@@ -73,16 +75,19 @@ const ProductList = () => {
         {processedProducts &&
             processedProducts.map(product => (
               <div key={product.id} className="product-card">
-                <link to= {`ProductDetail`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Link to= {`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <img src={product.image} alt={product.title} />
                 <div className="product-info">
                   <h5>{shortenName(product.title)}</h5>
                   <p>${product.price}</p>
-                  <p><RatingStars rating={product.rating.rate} /></p>
+                  <div>
+                    <RatingStars rating={product.rating.rate} />
+                    <span> ({product.rating.count} reviews)</span>
+                  </div>
                 </div>
-                </link>
+                </Link>
               </div>
-            ))}
+            ))};
         </div>
     </div>
   );
