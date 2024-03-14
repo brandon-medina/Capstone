@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLoginUserMutation } from '../api';
 
-function Login() {
+function Login({ setToken }) {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -15,14 +15,20 @@ function Login() {
         
         try {
             const response = await loginUser({ username, password }).unwrap();
+            console.log(response);
             localStorage.setItem('token', response.token); // Store token
+            setToken(response.token);
             navigate('/'); // Navigate to the homepage or dashboard as desired
+            console.log('Login response token:', response.token);
         } catch (error) {
             console.error('Failed to log in:', error);
         }
 
         setIsLoading(false);
+
+
     };
+
 
     return (
         <div>
@@ -46,6 +52,8 @@ function Login() {
             </form>
         </div>
     );
+    
 };
+
 
 export default Login;

@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetail";
 import MyCart from "./components/MyCart";
+import BillingInfo from "./components/BillingInfo"
 import "./App.css"
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
   
   return (
     <Router>
-      <Navbar />
+      <Navbar setToken={setToken} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login setToken={setToken}/>} />
@@ -41,6 +42,11 @@ function App() {
         <Route path="/cart" element={
           <ProtectedRoute>
             <MyCart token={token}/>
+          </ProtectedRoute>
+        } />
+        <Route path="/billing-info" element={
+          <ProtectedRoute>
+            <BillingInfo token={token}/>
           </ProtectedRoute>
         } />
         <Route path="*" element={<Navigate to="/" />} />
