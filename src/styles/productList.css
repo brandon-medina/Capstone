@@ -40,7 +40,7 @@
   .product-info h5 {
     margin: 0;
     margin-bottom: 0.1rem; /* Space between title and price */
-    font-size: 1rem; /* Larger font for the title */
+    font-size: 0.9rem; /* Larger font for the title */
   }
   
   .product-info p {
