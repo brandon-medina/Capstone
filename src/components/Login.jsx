@@ -1,52 +1,48 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection after login
+import { useNavigate } from 'react-router-dom';
 import { useLoginUserMutation } from '../api';
 
 function Login() {
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate();
-    const [loginUser] = useLoginUserMutation(); // Using the loginUser mutation
+    const [loginUser] = useLoginUserMutation();
 
+  // const [token, setToken] = useState(localStorage.getItem('token') || '');
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Corrected: Properly calling loginUser with { username, password } object
-            const result = await loginUser({ username, password }).unwrap();
-
-            // Checking result and storing token in session storage
-            if (result && result.token) {
-                sessionStorage.setItem('token', result.token); // Storing token in session storage
-                navigate('/'); // Redirect on success
-                console.log(result);
+            const response = await loginUser({ username, password }).unwrap();
+          // Here, we set the token in localStorage directly upon successful login
+              localStorage.setItem('token', response.token);
+              // Optionally set the token state if managing it locally
+              // setToken(response.token);
+              navigate('/'); // Navigate to homepage or dashboard as desired
+            } catch (error) {
+              console.error('Failed to log in:', error);
+              // Handle login error here
             }
-        } catch (error) {
-            console.error('Login failed:', error);
-            // Optionally handle login failure (e.g., show an error message)
-        }
-    };
+          };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <h2>Login</h2>
+        <div>
+          <h2>Login</h2>
+              <form onSubmit={handleSubmit}>
                 <label>Username:</label>
                 <input 
                     type="text" 
                     value={username} 
                     onChange={(e) => setUsername(e.target.value)} 
                 />
-            </div>
-            <div>
                 <label>Password:</label>
                 <input 
                     type="password" 
                     value={password} 
                     onChange={(e) => setPassword(e.target.value)} 
                 />
+              <button type="submit" disabled={isLoading}>Login</button>
+              </form>
             </div>
-            <button type="submit">Login</button>
-        </form>
     );
 };
 
