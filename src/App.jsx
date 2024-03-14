@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Home from "./components/Home"; // Adjust the path as necessary
-import ProductList from "./components/ProductList"; // Adjust the path as necessary
-import ProductDetail from "./components/ProductDetail"; // Adjust the path as necessary
-import MyCart from "./components/MyCart"; // Adjust the path as necessary
-import Login from "./components/Login"; // Adjust the path as necessary
+import Navbar from "./components/Navbar"
+import Login from "./components/Login";
+import Home from "./components/Home";
+import ProductList from "./components/ProductList";
+import ProductDetail from "./components/ProductDetail";
+import MyCart from "./components/MyCart";
+import "./App.css"
 
 function App() {
   const [token, setToken] = useState(null);
+  
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
 
   const ProtectedRoute = ({ children }) => {
     return token ? children : <Navigate to="/login" />;
@@ -15,6 +24,7 @@ function App() {
   
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login setToken={setToken}/>} />
