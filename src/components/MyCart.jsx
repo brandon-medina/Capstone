@@ -2,7 +2,7 @@
 import React from 'react';
 import { useCart } from '../hooks/useCart';
 import { useNavigate } from 'react-router-dom';
-// import "../styles/mycart.css"
+import '../styles/mycart.css'; // Ensure CSS is imported
 
 const MyCart = () => {
   const navigate = useNavigate();
@@ -12,24 +12,36 @@ const MyCart = () => {
     navigate('/billing-info');
   };
 
+  const shortenName = (name, maxLength = 20) => {
+    return name.length > maxLength ? `${name.substring(0, maxLength)}...` : name;
+  };
+
   return (
     <div className="shopping-cart">
-      <h2 className="cart-title">My Cart</h2>
-      <ul>
-        {cartItems.map((item) => (
-          <li key={item.id} className="item">
-            <img src={item.image} alt={item.title} className="image" />
-            <h3 className="item-name">{item.title}</h3>
+      <div className="title">My Cart</div>
+      {cartItems.map((item) => (
+        <div className="item" key={item.id}>
+          <div className="image">
+            <img src={item.image} alt={item.title} />
+          </div>
+          <div className="description">
+            <span>{shortenName(item.title)}</span>
+          </div>
+          <div className="quantity">
             <button className="minus-btn" onClick={() => decreaseQuantity(item.id)}>-</button>
-            <p className="quantity">{item.quantity}</p>
+            <span>{item.quantity}</span>
             <button className="plus-btn" onClick={() => increaseQuantity(item.id)}>+</button>
-            <button className="delete-btn"onClick={() => removeFromCart(item.id)}>Remove from Cart</button>
-            <p className="item-price">${item.price}</p>
-          </li>
-        ))}
-      </ul>
-      <h3 className="total-price">Total: ${calculateTotalPrice().toFixed(2)}</h3>
-      <button onClick={handleCheckout}>Checkout</button>
+          </div>
+          <div className="item-price">${item.price}</div>
+          <div className="remove-button">
+              <button className="delete-btn" onClick={() => removeFromCart(item.id)}>Remove</button>
+            </div>
+        </div>
+      ))}
+      <div className="checkout">
+        <div className="total">Total: <strong>${calculateTotalPrice().toFixed(2)}</strong></div>
+        <button onClick={handleCheckout} className="checkout-btn">Checkout</button>
+      </div>
     </div>
   );
 };

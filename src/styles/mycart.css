@@ -1,116 +1,113 @@
+/* src/styles/mycart.css */
+
 * {
     box-sizing: border-box;
   }
   
-  
   body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    background-color: #7EC855;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif; /* Ensure body inherits font */
   }
   
   .shopping-cart {
-    max-width: 750px;
+    max-width: 800px;
     width: 95%;
-    margin: 80px auto;
-    background: #FFFFFF;
-    box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
-    border-radius: 6px;
-  
-    display: flex;
-    flex-direction: column;
+    margin: 20px auto;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
   }
   
-  .cart-title {
-    height: 60px;
-    border-bottom: 1px solid #E1E8EE;
-    padding: 20px 30px;
-    color: #5E6977;
-    font-size: 18px;
-    font-weight: 400;
+  .title {
+    font-size: 24px;
+    font-weight: 500;
+    padding: 20px;
+    color: #333;
+    border-bottom: 1px solid #e1e8ee;
   }
   
   .item {
-    padding: 20px 30px;
-    height: 120px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 1fr 1fr; /* Adjust grid proportions as needed */
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e1e8ee;
+    gap: 10px; /* This sets spacing between grid items */
   }
   
-  .item:nth-child(3) {
-    border-top: 1px solid #E1E8EE;
-    border-bottom: 1px solid #E1E8EE;
+  .image img {
+    width: 100%; /* Full-width within its grid cell */
+    max-width: 100px; /* Adjust based on preference */
   }
   
-  .buttons {
-    position: relative;
-    padding-top: 30px;
-    margin-right: 60px;
+  .description span {
+    font-size: 18px;
+    color: #43484d;
   }
-  .delete-btn {
-    display: inline-block;
-    cursor: pointer;
-    width: 18px;
-    height: 17px;
-  }
-  .image {
-    margin-right: 50px;
-  }
-  .description {
-    padding-top: 10px;
-    margin-right: 60px;
-    width: 115px;
-    display: block;
-    font-size: 14px;
-    color: #43484D;
-    font-weight: 400;
-  }
+  
   .quantity {
-    padding-top: 20px;
-    margin-right: 60px;
-  }
-  button[class=btn] {
-    width: 30px;
-    height: 30px;
-    background-color: #E1E8EE;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-  }
-  .minus-btn img {
-    margin-bottom: 3px;
-  }
-  .plus-btn img {
-    margin-top: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px; /* Spacing between quantity controls */
+    font-size: 18px;
+    color: #43484d;
   }
   
-  button:focus,
-  input:focus {
-    outline:0;
-  }
   .item-price {
-    width: 83px;
-    padding-top: 27px;
-    text-align: center;
-    font-size: 16px;
-    color: #43484D;
-    font-weight: 300;
+    font-size: 18px;
+    color: #43484d;
   }
+  
+  .minus-btn,
+  .plus-btn,
+  .delete-btn,
+  .checkout-btn {
+    background-color: #e1e8ee;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .delete-btn:hover {
+    background-color: rgb(252, 0, 0); /* Or use a specific shade of red if you prefer */
+    color: white; /* Change text color if needed */
+  }
+  
+  .checkout {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f7f7f7;
+    border-top: 1px solid #e1e8ee;
+  }
+  
+  .checkout .total {
+    font-size: 20px;
+    color: #333;
+  }
+  
+  .checkout-btn {
+    background-color: #ff6000;
+    color: white;
+    padding: 10px 30px;
+    font-size: 18px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+
+  .checkout-btn:hover {
+    background-color: #e67300; /* Darker shade of the original orange */
+    color: #fff; /* Keep text color white */
+  }
+  
   @media (max-width: 800px) {
     .shopping-cart {
-      margin: 20px auto; /* Reduce margin on smaller screens */
-      height: auto;
-      overflow: hidden;
-    }
-    .item {
-      flex-direction: column; /* Stack item elements on small screens */
-      align-items: center;
-    }
-    .buttons, .image, .description, .quantity {
-      margin: 10px 0; /* Adjust spacing */
-    }
-    .image img {
-      width: 80%; /* Adjust image size as per need */
+      /* It's recommended to stack items on smaller screens */
+      .item {
+        grid-template-columns: 1fr;
+      }
     }
   }
