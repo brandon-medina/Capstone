@@ -45,31 +45,36 @@ const ProductList = () => {
 
   return (
     <div>
-      <h2>Products</h2>
-      <div>
-        Sort by: 
-        <select onChange={(e) => setSortKey(e.target.value)} value={sortKey}>
-          <option value="">Default</option>
-          <option value="title">Title</option>
-          <option value="priceLowHigh">Price Low to High</option>
-          <option value="priceHighLow">Price High to Low</option>
-          <option value="rating">Rating</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="filterCategory">Filter by category:</label>
-        <select
-          id="filterCategory"
-          value={filterCategory}
-          onChange={(e) => setFilterCategory(e.target.value)}
-        >
-          <option value="">Default</option>
-          <option value="electronics">Electronics</option>
-          <option value="jewelery">Jewelery</option>
-          <option value="men's clothing">Men's Clothing</option>
-          <option value="women's clothing">Women's Clothing</option>
-          // Add more categories as needed
-        </select>
+      <h1>Products</h1>
+      {/* Add the sort-filter-container here */}
+      <div className="sort-filter-container">
+        {/* filter-section for category filtering */}
+        <div className="filter-section">
+          <label htmlFor="filterCategory">Filter by category:</label>
+          <select
+            id="filterCategory"
+            value={filterCategory}
+            onChange={(e) => setFilterCategory(e.target.value)}
+          >
+            <option value="">Default</option>
+            <option value="electronics">Electronics</option>
+            <option value="jewelery">Jewelery</option>
+            <option value="men's clothing">Men's Clothing</option>
+            <option value="women's clothing">Women's Clothing</option>
+            {/* Add more categories as needed */}
+          </select>
+        </div>
+        {/* sort-section for product sorting */}
+        <div className="sort-section">
+          <label>Sort by: </label>
+          <select onChange={(e) => setSortKey(e.target.value)} value={sortKey}>
+            <option value="">Default</option>
+            <option value="title">Title</option>
+            <option value="priceLowHigh">Price Low to High</option>
+            <option value="priceHighLow">Price High to Low</option>
+            <option value="rating">Rating</option>
+          </select>
+        </div>
       </div>
       <div className="product-grid">
         {processedProducts &&
@@ -87,7 +92,7 @@ const ProductList = () => {
                 </div>
                 </Link>
               </div>
-            ))};
+            ))}
         </div>
     </div>
   );
