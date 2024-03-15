@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLoginUserMutation } from '../api';
+import '../styles/login.css';
 
 function Login({ setToken }) {
     const navigate = useNavigate();
@@ -31,7 +32,7 @@ function Login({ setToken }) {
 
 
     return (
-        <div>
+        <div className="login-container">
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
                 <label>Username:</label>
