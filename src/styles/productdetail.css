@@ -1,61 +1,57 @@
 /* Styles for ProductDetail component */
 
 .product-detail {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #f1f1f1;
-    border-radius: 8px;
-  }
-  
-  .product-detail img, .detail-actions {
-    /* Applying flex grow to detail-actions to take up remaining space */
-    flex: 1;
-  }
-  
-  /* Directly target the img element for styling */
-  .product-detail img {
-    max-width: 30%; /* Adjust the width of the image to take half of the container */
-    height: auto;
-    border-radius: 4px;
-    margin-right: 20px; /* Add margin to separate it from details */
-  }
-  
-  /* Styling for the details-actions wrapper */
-  .detail-actions {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start; /* Align items to the start of the detail-actions block */
-    text-align: left; /* Align the text to the left */
-    max-width: 50%; /* Limit the width of the details section */
-  }
-  
-  /* Re-structuring product-detail to align items side by side for img and details */
+  display: flex;
+  flex-direction: row; /* Changed to row for side-by-side layout */
+  justify-content: center; /* Center the items horizontally */
+  align-items: flex-start; /* Align items to the start vertically, changed for side-by-side layout */
+  flex-wrap: wrap; /* Allow items to wrap in smaller screens */
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.product-detail img, .detail-actions {
+  /* Applying flex grow to detail-actions to take up remaining space */
+  flex: 1;
+}
+
+.product-detail img {
+  max-width: 30%; /* Adjust the width of the image to take half of the container */
+  max-height: 400px; /* Maximum height added to keep images uniform */
+  width: auto; /* Ensure the width is auto-adjustable within max dimensions */
+  height: auto; /* Ensure the height is auto-adjustable within max dimensions */
+  object-fit: contain; /* Ensures the image is scaled correctly within its dimensions */
+  border-radius: 4px;
+  margin-right: 20px; /* Add margin to separate it from details */
+  align-self: center; /* Center the image vertically relative to the detail-actions */
+}
+
+.detail-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start; /* Align items to the start of the detail-actions block */
+  text-align: left; /* Align the text to the left */
+  max-width: 50%; /* Limit the width of the details section */
+}
+
+/* Improving responsiveness */
+@media screen and (max-width: 768px) {
   .product-detail {
-    flex-direction: row; /* Change flex direction to row to align items side by side */
-    justify-content: center; /* Center the items horizontally */
-    align-items: flex-start; /* Align items to the start vertically */
-    flex-wrap: wrap; /* Allow items to wrap in smaller screens */
+    flex-direction: column; /* Stack items on smaller screens */
+    align-items: center;
   }
-  
-  /* Improving responsiveness */
-  @media screen and (max-width: 768px) {
-    .product-detail {
-      flex-direction: column; /* Stack items on smaller screens */
-      align-items: center;
-    }
-  
-    .product-detail img, .detail-actions {
-      max-width: 100%; /* Allow image and details to take full width on smaller screens */
-    }
+
+  .product-detail img, .detail-actions {
+    max-width: 100%; /* Allow image and details to take full width on smaller screens */
   }
-  
-  /* Ensuring the .product-description is centered below both the image and details-actions */
-  .product-description {
-    width: 100%; /* Take the full width */
-    text-align: center; /* Center the text */
-    margin-top: 20px; /* Add some space above the description */
-  }
+}
+
+/* Ensuring the .product-description is centered below both the image and details-actions */
+.product-description {
+  width: 100%; /* Take the full width */
+  text-align: center; /* Center the text */
+  margin-top: 20px; /* Add some space above the description */
+}
