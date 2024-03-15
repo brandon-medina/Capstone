@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import home_store from '../assets/img/home_store.jpg';
 import '../styles/home.css'; // Ensure the CSS file is imported if it contains styles that you'd like to apply. 
 
 function Home() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+    
     return (
         <div className="home-container">
             <h1>Welcome to the Fake Store</h1>
