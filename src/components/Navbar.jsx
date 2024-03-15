@@ -1,34 +1,39 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/navbar.css'
 
 function Navbar({ setToken }) {
-
+  const navigate = useNavigate();
+  const location = useLocation();
   const handleLogout = () => {
     localStorage.removeItem('token');
     setToken(null);
+    navigate('/');
   };
 
-  const isLoggedIn = localStorage.getItem('token'); // fix typo here from getItme to getItem
+  const isLoggedIn = localStorage.getItem('token');
   
   return (
-    <nav>
-      <ul>
-        <li><Link to="/">Home</Link></li>
+    <nav className="navbar">
+      <ul className="nav-links">
+        <li className={location.pathname === '/' ? 'active' : ''}><button onClick={() => navigate('/')}>Home</button></li>
         {!isLoggedIn && (
-          <li><Link to="/login">Login</Link></li>
+          <li className={location.pathname === '/login' ? 'active' : ''}><button onClick={() => navigate('/login')}>Login</button></li>
         )}
-        {/* Ensure these Links render only when isLoggedIn is true */}
         {isLoggedIn && (
           <>
-            <li><Link to="/products">Products</Link></li>
-            <li><Link to="/cart">My Cart</Link></li>
-            <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
+            <li className={location.pathname.startsWith('/products') ? 'active' : ''}><button onClick={() => navigate('/products')}>Products</button></li>
+            <li><button onClick={handleLogout}>Logout</button></li>
           </>
         )}
       </ul>
+      {isLoggedIn && (
+        <ul className="nav-cart">
+          <li className={location.pathname === '/cart' ? 'active' : ''}><button onClick={() => navigate('/cart')}>My Cart</button></li>
+        </ul>
+      )}
     </nav>
-  );
+ );
 }
 
 export default Navbar;
