@@ -1,4 +1,3 @@
-/* src/styles/home.css */
 .home-container {
     display: flex;
     flex-direction: column;
@@ -6,30 +5,48 @@
     justify-content: center;
     min-height: 100vh;
     background-color: #f5f5f5;
+    background-image: url('../assets/img/home_store.jpg'); /* Adjust the path as necessary */
+    background-size: cover;
+    background-position: center;
+    position: relative; /* Necessary for the ::before pseudo-element to be positioned correctly */
+}
+/* Adding a ::before pseudo-element for transparency effect */
+.home-container::before {
+    content: ""; /* Required for a pseudo-element */
+    position: absolute; /* Positions the pseudo-element relative to its parent */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.5); /* Adjust the color and opacity as desired */
+    /* This color overlays the image, decreasing its visible opacity */
+}
+.home-container * {
+    position: relative; /* Makes text and other elements stack above the pseudo-element */
+    z-index: 1; /* Ensures content appears above the ::before layer */
 }
 
 .home-container h1 {
-    color: #333;
+    color: #fff; /* Adjust for better visibility against the background image */
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 20px;
-}
-
-.store-image {
-    max-width: 90%;
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: Improves readability */
+    padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .store-description {
     text-align: left;
     max-width: 800px;
     margin: 20px auto;
-    padding: 0 10px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    border-radius: 10px;
 }
 
-.store-description h2 {
-    margin-top: 20px;
+.store-description h2, .store-description p, .store-description ul {
+    color: #333; /* Ensure text is visible */
 }
 
 .store-description ul {
