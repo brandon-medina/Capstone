@@ -1,22 +1,33 @@
+// src/providers/CartProvider.jsx
+
 import React, { createContext, useState, useEffect } from 'react';
 
 export const CartContext = createContext();
 
-export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+const CartProvider = ({ children, token }) => {
+const [cartItems, setCartItems] = useState([]);
+const storageKey = token ? `cart_${token}` : 'cart_generic';
+  useEffect(() => {
+    const initCartOnRefresh = () => {
+      if (!token) {
+        const genericCartItems = JSON.parse(localStorage.getItem('cart_generic') || '[]');
+        if (genericCartItems.length > 0) {
+          setCartItems(genericCartItems);
+        }
+      }
+    };
+    initCartOnRefresh();
+  }, [token]);
+  
+  useEffect(() => {
+  const storedCartItems = JSON.parse(localStorage.getItem(storageKey)) || [];
+  setCartItems(storedCartItems);
+}, [storageKey]);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const storedCartItems = token ? JSON.parse(localStorage.getItem(`cart_${token}`)) || [] : [];
-    setCartItems(storedCartItems);
-  }, []);
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      localStorage.setItem(`cart_${token}`, JSON.stringify(cartItems));
-    }
-  }, [cartItems]);
+    // const token = localStorage.getItem('token');
+      localStorage.setItem(storageKey, JSON.stringify(cartItems));
+  }, [cartItems, storageKey]);
 
   const addToCart = (product) => {
     setCartItems((currentItems) => {
@@ -73,3 +84,5 @@ const calculateTotalPrice = () => {
     </CartContext.Provider>
   );
 };
+
+export default CartProvider;

@@ -16,14 +16,24 @@ function Login({ setToken }) {
         
         try {
             const response = await loginUser({ username, password }).unwrap();
-            console.log(response);
-            localStorage.setItem('token', response.token); // Store token
+            localStorage.setItem('token', response.token);
             setToken(response.token);
+    
+            // Retrieve generic cart items
+            const genericCartItems = JSON.parse(localStorage.getItem('cart_generic') || '[]');
+    
+            // Check if there are generic cart items to be migrated
+            if (genericCartItems.length > 0) {
+              // Create or overwrite the user-specific cart with generic cart items
+              localStorage.setItem(`cart_${response.token}`, JSON.stringify(genericCartItems));
+              // Optionally, clear the generic cart
+              // localStorage.removeItem('cart_generic');
+            }
+    
             navigate('/'); // Navigate to the homepage or dashboard as desired
-            console.log('Login response token:', response.token);
-        } catch (error) {
+          } catch (error) {
             console.error('Failed to log in:', error);
-        }
+          }
 
         setIsLoading(false);
 

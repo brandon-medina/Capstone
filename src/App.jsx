@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Navbar from "./components/Navbar"
-import Login from "./components/Login";
+import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetail";
 import MyCart from "./components/MyCart";
-import BillingInfo from "./components/BillingInfo"
-import "./App.css"
+import Login from "./components/Login";
+import BillingInfo from "./components/BillingInfo";
+import CartProvider from "./providers/CartProvider";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
-  
+
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
@@ -24,35 +24,21 @@ function App() {
   };
   
   return (
-    <Router>
-      <Navbar setToken={setToken} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login setToken={setToken}/>} />
-        <Route path="/products" element={
-          <ProtectedRoute>
-            <ProductList token={token}/>
-          </ProtectedRoute>
-        } />
-        <Route path="/products/:productId" element={
-          <ProtectedRoute>
-            <ProductDetail token={token}/>
-          </ProtectedRoute>
-        } />
-        <Route path="/cart" element={
-          <ProtectedRoute>
-            <MyCart token={token}/>
-          </ProtectedRoute>
-        } />
-        <Route path="/billing-info" element={
-          <ProtectedRoute>
-            <BillingInfo token={token}/>
-          </ProtectedRoute>
-        } />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </Router>
-  )
-};
-
-export default App;
+    <CartProvider token={token}>
+      <Router>
+        <Navbar setToken={setToken} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login setToken={setToken}/>} />
+          {/* Applying ProtectedRoute component for routes that require authentication */}
+          <Route path="/products" element={<ProtectedRoute><ProductList /></ProtectedRoute>} />
+          <Route path="/products/:productId" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>} />
+          <Route path="/cart" element={<ProtectedRoute><MyCart /></ProtectedRoute>} />
+          <Route path="/billing-info" element={<ProtectedRoute><BillingInfo /></ProtectedRoute>} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Router>
+    </CartProvider> 
+  );
+  }
+  export default App;

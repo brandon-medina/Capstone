@@ -6,10 +6,20 @@ function Navbar({ setToken }) {
   const navigate = useNavigate();
   const location = useLocation();
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    setToken(null);
-    navigate('/');
-  };
+    // Retrieve the current user's cart items.
+  const currentUserCartKey = `cart_${localStorage.getItem('token')}`;
+  const currentUserCartItems = JSON.parse(localStorage.getItem(currentUserCartKey)) || [];
+  
+  // Check if there are items to migrate.
+  if (currentUserCartItems.length > 0) {
+    // Optionally, merge with existing 'cart_generic' items or simply replace them.
+    localStorage.setItem('cart_generic', JSON.stringify(currentUserCartItems));
+  }
+  // Proceed with logout.
+  localStorage.removeItem('token');
+  setToken(null);
+  navigate('/');
+};
 
   const isLoggedIn = localStorage.getItem('token');
   
