@@ -90,7 +90,7 @@
   }
   
   .checkout-btn {
-    background-color: #ff6000;
+    background-color: #007bff;
     color: white;
     padding: 10px 30px;
     font-size: 18px;
@@ -99,7 +99,7 @@
   }
 
   .checkout-btn:hover {
-    background-color: #e67300; /* Darker shade of the original orange */
+    background-color: #005ec2; /* Darker shade of the original orange */
     color: #fff; /* Keep text color white */
   }
   
