@@ -4,7 +4,6 @@ ul {
   margin: 0;
   padding: 0;
 }
-
 .navbar {
   overflow: hidden;
   background-color: #333;
@@ -18,31 +17,48 @@ ul {
   padding: 0 10px; /* Adjust as needed */
   box-sizing: border-box; /* Make sure padding doesn't affect total width */
   z-index: 1000; /* Ensures navbar stays on top */
+  height: 40px;
 }
-
 .nav-links, .nav-cart {
   display: flex; /* Enables flexbox layout for direct children */
 }
-
 .nav-links li, .nav-cart li {
   margin-right: 0px; /* Space between items */
 }
-
 .nav-links li:last-child, .nav-cart li:last-child {
   margin-right: 0; /* Remove margin for the last item */
 }
-
 .nav-links li button, .nav-cart li button {
   color: white;
-  padding: 14px 16px;
+  padding: 10px 16px; /* Reduced top and bottom padding */
   text-decoration: none;
   background-color: transparent; /* Remove button styling */
   border: none; /* Remove border */
   cursor: pointer;
 }
-
+/* Adjust img within cart button */
+.nav-cart li button img {
+  height: 35px; /* Allow the image to fill the button vertically */
+  width: auto; /* Maintain aspect ratio */
+  vertical-align: middle; /* Align img with text if needed */
+}
 /* Change the color for active/current link */
 .nav-links li.active button, .nav-links li button:hover, .nav-cart li button:hover {
   background-color: #ddd;
   color: black;
+}
+.cart-count {
+  background-color: rgb(255, 0, 0);
+  color: white;
+  border-radius: 50%; /* Makes it a circle */
+  padding: 2px 6px; /* Adjust based on your needs */
+  font-size: 0.75rem; /* Smaller font size for the count */
+  position: absolute; /* Positioning relative to cart icon button */
+  bottom: 8px;
+  right: 10px;
+  transform: translate(1%, 1%); /* Adjusts the position to hang off the bottom right */
+  z-index: 10;
+}
+.nav-cart li button {
+  position: relative; /* Ensures the cart count positions correctly relative to this button */
 }
