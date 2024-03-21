@@ -1,52 +1,50 @@
-import React, { useEffect } from 'react';
-import home_store from '../assets/img/home_store.jpg';
-import '../styles/home.css'; // Ensure the CSS file is imported if it contains styles that you'd like to apply. 
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useGetProductsQuery } from '../api'; // Adjust based on your actual API hooks
+import capstoneLogo from '../assets/img/capstone_logo.jpg';
+import '../styles/home.css'
 
 function Home() {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-    
-    return (
-        <div className="home-container">
-            <h1>Welcome to the Fake Store</h1>
- 
-            <div className="store-description">
-                <p>
-                This webpage is an interactive and user-friendly e-commerce platform named "Fake Store", designed using React. It showcases various features essential for a modern online shopping experience, including product browsing, detailed product information, a shopping cart, and user authentication.
-                </p>
-                <h2>Core Features:</h2>
-                <ul>
-                    <li>
-                        <strong>Navigation Bar:</strong> Intuitively designed for ease of navigation throughout the site, the navigation bar dynamically updates to reflect whether a user is logged in or not. Authenticated users can navigate to product listings and view their cart, while unauthenticated users are prompted to log in or view products.
-                    </li>
-                    <li>
-                        <strong>Home Page:</strong> Features a welcoming message and an inviting image representing the store, creating an engaging first impression while providing a quick overview of what the store offers.
-                    </li>
-                    <li>
-                        <strong>Product Listing and Detail:</strong> Users can browse through a list of products, filter and sort them based on categories, price, or ratings. Clicking on a product leads to a detailed view, offering in-depth information like product descriptions, prices, ratings, and an option to add the product to the cart.
-                    </li>
-                    <li>
-                        <strong>Shopping Cart:</strong> A functional shopping cart allows users to review their selected products, adjust quantities, remove items, and proceed to checkout, ensuring a smooth shopping experience.
-                    </li>
-                    <li>
-                        <strong>Login and Authentication:</strong> The login functionality enables users to authenticate, enhancing security and personalizing the user experience. The authentication state is managed with React's Context API, and local storage is utilized for persisting the user's session.
-                    </li>
-                    <li>
-                        <strong>Checkout Process:</strong> Protected routes ensure that only authenticated users can proceed to the checkout process, culminating in a billing information page designed for transaction completion.
-                    </li>
-                </ul>
-                <h2> Technical Stack: </h2>
-                <p>
-                    This application leverages React for its frontend, showcasing the power of hooks for state management (useState, useEffect) and navigation (BrowserRouter, Routes, Route, Navigate). Custom hooks and context providers are used to manage the shopping cart, demonstrating an advanced understanding of React's capabilities for stateful logic and context management. The styling is thoughtfully applied through CSS modules, contributing to the site's visual appeal and user experience.
-                </p>
-                
-                <p>
-                    Overall, the "Fake Store" web application stands as a comprehensive demonstration of a fully functional e-commerce site crafted with React. It meticulously combines user authentication, product browsing, and shopping cart management into a seamless online shopping journey. This platform exemplifies how modern web development techniques and React's robust ecosystem can be utilized to create engaging and dynamic web applications.
-                </p>
-            </div>
+  const { data: products, error, isLoading } = useGetProductsQuery();
+  
+  // Assuming the API returns an array of products, we'll take the first 4 for our featured section
+  const featuredProducts = products?.slice(0, 4);
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
+  return (
+    <div className="home-container">
+      <div className="brand-section">
+        <img src={capstoneLogo} alt="Capstone Logo" className="brand-logo" />
+        <h1>Capstone Clothing Co.</h1>
+      </div>
+      <div className="hero">
+        <div className="hero-content">
+          <h1>Discover Amazing Products</h1>
+          <p>Find everything you need to make your life better.</p>
+          <Link to="/products" className="hero-cta">Shop Now</Link>
         </div>
-    );
+      </div>
+      <div className="featured-products">
+        <h2>Featured Products</h2>
+        {isLoading && <p>Loading products...</p>}
+        {error && <p>An error occurred</p>}
+        <div className="featured-grid">
+          {featuredProducts?.map(product => (
+            <div key={product.id} className="featured-item">
+              <Link to={`/products/${product.id}`}>
+                <img src={product.image} alt={product.title} />
+                <h3>{product.title}</h3>
+                <p>${product.price}</p>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+    </div>
+  );
 }
-
 export default Home;

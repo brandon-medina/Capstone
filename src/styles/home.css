@@ -1,58 +1,86 @@
-.home-container {
+
+  .home-container > * {
+    position: relative;
+    z-index: 1;
+    background-color: #EEEAE1;
+  }
+  
+  .brand-section {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #f5f5f5;
-    background-image: url('../assets/img/home_store.jpg'); /* Adjust the path as necessary */
+    align-items: center; /* Centers the logo vertically with the text */
+    gap: 20px; /* Adjust spacing between logo and text as needed */
+  }
+  .brand-logo {
+    height: 100px; /* Adjust based on desired size */
+  }
+  
+  .hero {
+    background-image: url('../images/hero_bg.jpg');
     background-size: cover;
     background-position: center;
-    position: relative; /* Necessary for the ::before pseudo-element to be positioned correctly */
-}
-/* Adding a ::before pseudo-element for transparency effect */
-.home-container::before {
-    content: ""; /* Required for a pseudo-element */
-    position: absolute; /* Positions the pseudo-element relative to its parent */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.5); /* Adjust the color and opacity as desired */
-    /* This color overlays the image, decreasing its visible opacity */
-}
-.home-container * {
-    position: relative; /* Makes text and other elements stack above the pseudo-element */
-    z-index: 1; /* Ensures content appears above the ::before layer */
-}
-
-.home-container h1 {
-    color: #fff; /* Adjust for better visibility against the background image */
+    color: #090808;
+    text-align: center;
+    padding: 50px 20px;
+  }
+  
+  .hero-content h1 {
     font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+  
+  .hero-cta {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  .featured-products h2 {
     text-align: center;
     margin-bottom: 20px;
-    background-color: rgba(0, 0, 0, 0.5); /* Optional: Improves readability */
+  }
+  
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  
+  .featured-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffff;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .featured-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .featured-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .featured-item h3, .featured-item p {
     padding: 10px;
-    border-radius: 10px;
-}
-
-.store-description {
-    text-align: left;
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
-    border-radius: 10px;
-}
-
-.store-description h2, .store-description p, .store-description ul {
-    color: #333; /* Ensure text is visible */
-}
-
-.store-description ul {
-    padding-left: 20px;
-}
-
-.store-description li {
-    margin-bottom: 10px;
-}
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .featured-grid {
+      grid-template-columns: 1fr; /* Stack on smaller screens */
+    }
+    .container {
+      padding: 10px;
+    }
+  }

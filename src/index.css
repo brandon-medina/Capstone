@@ -1,3 +1,22 @@
 body {
   padding-top: 50px; /* Add padding to avoid content overlap due to the fixed navbar */
+  background-color: #EEEAE1
+}
+
+body, h1, h2, h3, p {
+  margin: 0;
+  padding-left: 10px;
+  font-family: 'Arial', sans-serif;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+/* Utility classes for spacing */
+.mt-20 {
+  margin-top: 20px;
+}
+.mb-20 {
+  margin-bottom: 20px;
 }
