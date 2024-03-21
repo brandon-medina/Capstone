@@ -18,7 +18,7 @@ function Home() {
     <div className="home-container">
       <div className="brand-section">
         <img src={capstoneLogo} alt="Capstone Logo" className="brand-logo" />
-        <h1>Capstone Clothing Co.</h1>
+        <h1>Capstone Co.</h1>
       </div>
       <div className="hero">
         <div className="hero-content">
