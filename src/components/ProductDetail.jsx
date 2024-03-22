@@ -1,6 +1,6 @@
 // In your ProductDetail.jsx or wherever needed
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useGetProductDetailQuery } from '../api'; // Adjust the import path as necessary
 import { useCart } from '../hooks/useCart';
 import '../styles/productdetail.css';
@@ -9,11 +9,19 @@ const ProductDetail = () => {
     const { productId } = useParams();
     const { data: product, error, isLoading } = useGetProductDetailQuery(productId);
     const { addToCart } = useCart();
+    const navigate = useNavigate();
+    const [showPopup, setShowPopup] = useState(false);
 
     const handleAddToCart = (product) => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        navigate('/login');
+      } else {
         addToCart(product);
-        // Dispatch event to notify other components (like Navbar) about the cart update
+        setShowPopup(true);
+        setTimeout(() => setShowPopup(false), 3000);
         window.dispatchEvent(new CustomEvent('cartUpdated'));
+      }
     };
 
     if (isLoading) return <div>Loading...</div>;
@@ -34,6 +42,11 @@ const ProductDetail = () => {
                 <p className="product-description">{product.description}</p>
                 {/* 'Add to Cart' Button */}
                 <button className="add-to-cart-btn" onClick={() => handleAddToCart(product)}>Add to Cart</button>
+                {showPopup && (
+                  <div className="popup-notification">
+                    Item added to cart!
+                  </div>
+                )}
             </div>
         </div>
     );

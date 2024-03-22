@@ -31,8 +31,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login setToken={setToken}/>} />
           {/* Applying ProtectedRoute component for routes that require authentication */}
-          <Route path="/products" element={<ProtectedRoute><ProductList /></ProtectedRoute>} />
-          <Route path="/products/:productId" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>} />
+          <Route path="/products" element={<ProductList />} />
+          <Route path="/products/:productId" element={<ProductDetail />} />
           <Route path="/cart" element={<ProtectedRoute><MyCart /></ProtectedRoute>} />
           <Route path="/billing-info" element={<ProtectedRoute><BillingInfo /></ProtectedRoute>} />
           <Route path="*" element={<Navigate to="/" />} />

@@ -23,7 +23,14 @@ function Navbar({ setToken }) {
     };
   }, []);
   const handleLogout = () => {
-    // Logout logic remains the same...
+    const currentUserCartKey = `cart_${localStorage.getItem('token')}`;
+    const currentUserCartItems = JSON.parse(localStorage.getItem(currentUserCartKey)) || [];
+    if (currentUserCartItems.length > 0) {
+      localStorage.setItem('cart_generic', JSON.stringify(currentUserCartItems));
+    }
+    localStorage.removeItem('token');
+    setToken(null);
+    navigate('/');
   };
   const isLoggedIn = localStorage.getItem('token');
 
@@ -31,12 +38,12 @@ function Navbar({ setToken }) {
     <nav className="navbar">
       <ul className="nav-links">
         <li className={location.pathname === '/' ? 'active' : ''}><button onClick={() => navigate('/')}>Home</button></li>
+        <li className={location.pathname.startsWith('/products') ? 'active' : ''}><button onClick={() => navigate('/products')}>Products</button></li>
         {!isLoggedIn && (
           <li className={location.pathname === '/login' ? 'active' : ''}><button onClick={() => navigate('/login')}>Login</button></li>
         )}
         {isLoggedIn && (
           <>
-            <li className={location.pathname.startsWith('/products') ? 'active' : ''}><button onClick={() => navigate('/products')}>Products</button></li>
             <li><button onClick={handleLogout}>Logout</button></li>
           </>
         )}
