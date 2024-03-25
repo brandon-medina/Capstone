@@ -1,4 +1,4 @@
-This webpage is an interactive and user-friendly e-commerce platform named "Fake Store", designed using React. It showcases various features essential for a modern online shopping experience, including product browsing, detailed product information, a shopping cart, and user authentication.
+This webpage is an interactive and user-friendly e-commerce platform named "Capstone Co.", designed using React. It showcases various features essential for a modern online shopping experience, including product browsing, detailed product information, a shopping cart, and user authentication.
 
 Core Features:
     Navigation Bar: Intuitively designed for ease of navigation throughout the site, the navigation bar dynamically updates to reflect whether a user is logged in or not. Authenticated users can navigate to product listings and view their cart, while unauthenticated users are prompted to log in or view products.
@@ -10,4 +10,4 @@ Core Features:
 
 Technical Stack: This application leverages React for its frontend, showcasing the power of hooks for state management (useState, useEffect) and navigation (BrowserRouter, Routes, Route, Navigate). Custom hooks and context providers are used to manage the shopping cart, demonstrating an advanced understanding of React's capabilities for stateful logic and context management. The styling is thoughtfully applied through CSS modules, contributing to the site's visual appeal and user experience.
 
-Overall, the "Fake Store" web application stands as a comprehensive demonstration of a fully functional e-commerce site crafted with React. It meticulously combines user authentication, product browsing, and shopping cart management into a seamless online shopping journey. This platform exemplifies how modern web development techniques and React's robust ecosystem can be utilized to create engaging and dynamic web applications.
+Overall, the "Capstone Co." web application stands as a comprehensive demonstration of a fully functional e-commerce site crafted with React. It meticulously combines user authentication, product browsing, and shopping cart management into a seamless online shopping journey. This platform exemplifies how modern web development techniques and React's robust ecosystem can be utilized to create engaging and dynamic web applications.
