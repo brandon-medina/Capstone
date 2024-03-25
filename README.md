@@ -2,7 +2,7 @@ This webpage is an interactive and user-friendly e-commerce platform named "Caps
 
 Core Features:
     Navigation Bar: Intuitively designed for ease of navigation throughout the site, the navigation bar dynamically updates to reflect whether a user is logged in or not. Authenticated users can navigate to product listings and view their cart, while unauthenticated users are prompted to log in or view products.
-    Home Page: Features a welcoming message and an inviting image representing the store, creating an engaging first impression while providing a quick overview of what the store offers.
+    Home Page: Features a list of featured products that can take users to each products' respective details page or a quick link to the product list page. Also features the name of the website with the company logo.
     Product Listing and Detail: Users can browse through a list of products, filter and sort them based on categories, price, or ratings. Clicking on a product leads to a detailed view, offering in-depth information like product descriptions, prices, ratings, and an option to add the product to the cart.
     Shopping Cart: A functional shopping cart allows users to review their selected products, adjust quantities, remove items, and proceed to checkout, ensuring a smooth shopping experience.
     Login and Authentication: The login functionality enables users to authenticate, enhancing security and personalizing the user experience. The authentication state is managed with React's Context API, and local storage is utilized for persisting the user's session.
