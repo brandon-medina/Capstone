@@ -10,4 +10,23 @@ Core Features:
 
 Technical Stack: This application leverages React for its frontend, showcasing the power of hooks for state management (useState, useEffect) and navigation (BrowserRouter, Routes, Route, Navigate). Custom hooks and context providers are used to manage the shopping cart, demonstrating an advanced understanding of React's capabilities for stateful logic and context management. The styling is thoughtfully applied through CSS modules, contributing to the site's visual appeal and user experience.
 
-Overall, the "Capstone Co." web application stands as a comprehensive demonstration of a fully functional e-commerce site crafted with React. It meticulously combines user authentication, product browsing, and shopping cart management into a seamless online shopping journey. This platform exemplifies how modern web development techniques and React's robust ecosystem can be utilized to create engaging and dynamic web applications.
+Users can access this website using the following URL:
+    https://capstone-project-v002.netlify.app/
+
+How to Login:
+    Because this website does not have a feature for creating new accounts yet, users can use pre-made accounts from the API. The following usernames and passwords are:
+            User 1: John Doe
+            Username: johnd
+            Password: m38rmF$
+
+            User 2: David Morrison
+            Username: mor_2314
+            Password: 83r5^_
+
+            User 3: Kevin Ryan
+            Username: kevinryan
+            Password: kev02937@
+
+            User 4: Don Romer
+            Username: donero
+            Password: ewedon
